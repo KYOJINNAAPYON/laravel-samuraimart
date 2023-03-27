@@ -1,4 +1,4 @@
-<x-mail::message>
+@component('mail::message')
 {{-- Greeting --}}
 @if (! empty($greeting))
 # {{ $greeting }}
@@ -24,9 +24,9 @@
         default => 'primary',
     };
 ?>
-<x-mail::button :url="$actionUrl" :color="$color">
+@component('mail::button', ['url' => $actionUrl, 'color' => $color])
 {{ $actionText }}
-</x-mail::button>
+@endcomponent
 @endisset
 
 {{-- Outro Lines --}}
@@ -39,19 +39,19 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-@lang('よろしくお願いします。'),<br>
+@lang('よろしくお願いします。')<br>
 {{ config('app.name') }}
 @endif
 
 {{-- Subcopy --}}
 @isset($actionText)
-<x-slot:subcopy>
+@slot('subcopy')
 @lang(
     ":actionText ボタンが利用できない場合は、以下のURLをコピー＆ペーストしてブラウザから直接アクセスしてください。\n",
     [
         'actionText' => $actionText,
     ]
 ) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
-</x-slot:subcopy>
+@endslot
 @endisset
-</x-mail::message>
+@endcomponent
