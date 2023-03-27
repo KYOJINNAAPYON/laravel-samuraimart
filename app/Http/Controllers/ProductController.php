@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -26,7 +27,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $categories = Category::all();
+
+        return view('products.create', compact('categories'));
     }
 
     /**
@@ -41,6 +44,7 @@ class ProductController extends Controller
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
+        $product->category_id = $request->input('category_id');
         $product->save();
 
         return to_route('products.index');
