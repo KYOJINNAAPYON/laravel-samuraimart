@@ -2,7 +2,7 @@
  
  @section('content')
  <div class="container">
-     <h1>新しい商品を追加</h1>
+     <h1>新しい商品を追加 </h1>
  
      <form action="{{ route('products.store') }}" method="POST">
          @csrf
