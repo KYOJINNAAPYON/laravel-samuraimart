@@ -58,7 +58,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('products.show', compact('product'));
+        $reviews = $product->reviews()->get();
+  
+        return view('products.show', compact('product', 'reviews'));
     }
 
     /**
@@ -88,6 +90,8 @@ class ProductController extends Controller
         $product->price = $request->input('price');
         $product->category_id = $request->input('category_id');
         $product->update();
+
+        return to_route('products.index');
     }
 
     /**
