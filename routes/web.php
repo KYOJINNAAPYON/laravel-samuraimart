@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('products', ProductController::class)->middleware(['auth', 'verified']);
-Auth::routes(['verify' => true]);
+Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
+
+//Route::resource('products', ProductController::class)->middleware(['auth', 'verified']);
+//Auth::routes(['verify' => true]);
+Route::resource('products', ProductController::class);
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
