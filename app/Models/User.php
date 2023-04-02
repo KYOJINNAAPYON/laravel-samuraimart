@@ -11,8 +11,8 @@ use App\Notifications\CustomVerifyEmail;
 use App\Notifications\CustomResetPassword;
 use Overtrue\LaravelFavorite\Traits\Favoriter;
 
-//class User extends Authenticatable implements MustVerifyEmail
-  class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
+  //class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, Favoriter;
 
