@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function mypage()
+    {
+        $user = Auth::user();
+
+        return view('users.mypage', compact('user'));
+    }
 
     /**
      * Show the form for editing the specified resource.
