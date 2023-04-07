@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ReviewController;
 
 /*
@@ -19,6 +20,10 @@ use App\Http\Controllers\ReviewController;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::controller(CartController::class)->group(function () {
+    Route::get('users/carts', 'index')->name('carts.index');
 });
 
 Route::controller(UserController::class)->group(function() {
