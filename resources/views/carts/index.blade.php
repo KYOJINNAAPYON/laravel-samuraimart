@@ -31,7 +31,7 @@
         <h3 class="mt-4">{{$product->name}}</h3>
       </div>
       <div class="col-md-2">
-        <h3 class="w-100 mt-4">￥{{$product->qty}}</h3>
+        <h3 class="w-100 mt-4">{{$product->qty}}</h3>
       </div>
       <div class="col-md-2">
         <h3 class="w-100 mt-4">￥{{$product->qty * $product->price}}</h3>
