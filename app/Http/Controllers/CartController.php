@@ -45,6 +45,7 @@ class CartController extends Controller
                 'weight' => $request->weight,
                 'options' => [
                     'image' => $request->image,
+                    'carriage' => $request->carriage
                 ]
             ]
             );
