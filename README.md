@@ -6,7 +6,7 @@
  管理画面も作成したので、管理者での編集や商品登録も可能です。
 <br>
 ## URL
-aaaaaaaaaaa
+https://samuraimart-nh.herokuapp.com/  
 <br>
 ## 習得した技術
 CRUD機能の実装方法を学習しました。  
