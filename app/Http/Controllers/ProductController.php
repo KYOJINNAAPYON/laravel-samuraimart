@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Review;
 use App\Models\MajorCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -19,11 +21,13 @@ class ProductController extends Controller
     {
         if ($request->category !== null) {
             $products = Product::where('category_id', $request->category)->sortable()->paginate(15);
+            $score_avgs = Review::selectRaw('product_id, ROUND(AVG(score)) as score_avg')->groupBy('product_id')->get();
             $total_count = Product::where('category_id', $request->category)->count();
             $category = Category::find($request->category);
             $major_category = MajorCategory::find($category->major_category_id);
         } else {
             $products = Product::sortable()->paginate(15);
+            $score_avgs = Review::selectRaw('product_id, ROUND(AVG(score)) as score_avg')->groupBy('product_id')->get();
             $total_count = "";
             $category = null;
             $major_category = null;
@@ -31,7 +35,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $major_categories = MajorCategory::all();
 
-        return view('products.index', compact('products', 'category', 'major_category', 'categories', 'major_categories', 'total_count'));
+        return view('products.index', compact('products', 'category', 'major_category', 'categories', 'major_categories', 'total_count', 'score_avgs'));
     }
 
     /**
@@ -73,7 +77,6 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $reviews = $product->reviews()->get();
-  
         return view('products.show', compact('product', 'reviews'));
     }
 
