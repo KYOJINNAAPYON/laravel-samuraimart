@@ -76,10 +76,21 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Product $product,Request $request)
     {
         $reviews = $product->reviews()->get();
+        
+        if ($request->category !== null) {
+        $score_avgs = Review::selectRaw('product_id, ROUND(AVG(score),1) as score_avg')->groupBy('product_id');
+        $products = Product::where('category_id', $request->category)->leftJoinsub($score_avgs, 'score_avg',function($join){
+            $join->on('products.id', '=', 'score_avg.product_id');})->sortable()->paginate(15);
+        $score_total = Review::selectRaw
+        } else {
+        $score_avgs = Review::selectRaw('product_id, ROUND(AVG(score),1) as score_avg')->groupBy('product_id');
+        $products = Product::leftJoinsub($score_avgs, 'score_avg',function($join){
+            $join->on('products.id', '=', 'score_avg.product_id');})->sortable()->paginate(15);
         return view('products.show', compact('product', 'reviews'));
+        }
     }
 
     /**
