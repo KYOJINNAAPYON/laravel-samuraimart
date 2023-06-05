@@ -20,16 +20,16 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if ($request->category !== null) {
-            $score_avgs = Review::selectRaw('product_id, ROUND(AVG(score),1) as score_avg')->groupBy('product_id');
-            $products = Product::where('category_id', $request->category)->leftJoinsub($score_avgs, 'score_avg',function($join){
-                $join->on('products.id', '=', 'score_avg.product_id');})->sortable()->paginate(15);
+            $products_score = Review::selectRaw('product_id, ROUND(AVG(score),1) as score_avg, COUNT(product_id) as score_total')->groupBy('product_id');
+            $products = Product::where('category_id', $request->category)->leftJoinsub($products_score, 'products_score',function($join){
+                $join->on('products.id', '=', 'products_score.product_id');})->sortable()->paginate(15);
             $total_count = Product::where('category_id', $request->category)->count();
             $category = Category::find($request->category);
             $major_category = MajorCategory::find($category->major_category_id);
         } else {
-            $score_avgs = Review::selectRaw('product_id, ROUND(AVG(score),1) as score_avg')->groupBy('product_id');
-            $products = Product::leftJoinsub($score_avgs, 'score_avg',function($join){
-                $join->on('products.id', '=', 'score_avg.product_id');})->sortable()->paginate(15);
+            $products_score = Review::selectRaw('product_id, ROUND(AVG(score),1) as score_avg, COUNT(product_id) as score_total')->groupBy('product_id');
+            $products = Product::leftJoinsub($products_score, 'products_score',function($join){
+                $join->on('products.id', '=', 'products_score.product_id');})->sortable()->paginate(15);
             $total_count = "";
             $category = null;
             $major_category = null;
@@ -37,7 +37,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $major_categories = MajorCategory::all();
 
-        return view('products.index', compact('products', 'category', 'major_category', 'categories', 'major_categories', 'total_count', 'score_avgs'));
+        return view('products.index', compact('products', 'category', 'major_category', 'categories', 'major_categories', 'total_count', 'products_score'));
     }
 
     /**
@@ -76,21 +76,11 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product,Request $request)
+    public function show(Product $product)
     {
         $reviews = $product->reviews()->get();
-        
-        if ($request->category !== null) {
-        $score_avgs = Review::selectRaw('product_id, ROUND(AVG(score),1) as score_avg')->groupBy('product_id');
-        $products = Product::where('category_id', $request->category)->leftJoinsub($score_avgs, 'score_avg',function($join){
-            $join->on('products.id', '=', 'score_avg.product_id');})->sortable()->paginate(15);
-        $score_total = Review::selectRaw
-        } else {
-        $score_avgs = Review::selectRaw('product_id, ROUND(AVG(score),1) as score_avg')->groupBy('product_id');
-        $products = Product::leftJoinsub($score_avgs, 'score_avg',function($join){
-            $join->on('products.id', '=', 'score_avg.product_id');})->sortable()->paginate(15);
-        return view('products.show', compact('product', 'reviews'));
-        }
+        $score_avg = Review::selectRaw('product_id, ROUND(AVG(score),1) as score_avg')->groupBy('product_id')->where('product_id','=',$product->id)->first();
+        return view('products.show', compact('product', 'reviews', 'score_avg'));
     }
 
     /**
