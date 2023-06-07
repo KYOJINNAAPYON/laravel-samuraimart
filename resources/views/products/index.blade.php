@@ -35,8 +35,10 @@
                          <div class="col-12">
                              <p class="samuraimart-product-label mt-2">
                                  {{$product->name}}<br>
-                                    {{$product->products_score}}
-                                    
+                                 @foreach ($products as $product)
+                                    {{$product->score_avg}}<br>
+                                    {{$product->score_total}}
+                                 @endforeach                                    
                                  <label>￥{{$product->price}}</label>
                              </p>
                          </div>
