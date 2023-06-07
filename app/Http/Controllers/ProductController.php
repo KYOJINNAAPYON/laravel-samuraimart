@@ -79,8 +79,9 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $reviews = $product->reviews()->get();
-        $score_avg = Review::selectRaw('product_id, ROUND(AVG(score),1) as score_avg')->groupBy('product_id')->where('product_id','=',$product->id)->first();
-        return view('products.show', compact('product', 'reviews', 'score_avg'));
+        $products_score = Review::selectRaw('product_id, ROUND(AVG(score),1) as score_avg, COUNT(product_id) as score_total')->groupBy('product_id')->where('product_id','=',$product->id)->first();
+        // $score_avg = Review::selectRaw('product_id, ROUND(AVG(score),1) as score_avg')->groupBy('product_id')->where('product_id','=',$product->id)->first();
+        return view('products.show', compact('product', 'reviews', 'products_score'));
     }
 
     /**
