@@ -46,6 +46,8 @@
                         <p class="samuraimart-product-label mt-2">
                             {{ $recently_product->name }}<br>
                             <label>{{ $recently_product->price }}</label>
+                            {{ $recently_product->score_avg }}<br>
+                            {{ $recently_product->score_total }}
                         </p>
                     </div>
                 </div>
