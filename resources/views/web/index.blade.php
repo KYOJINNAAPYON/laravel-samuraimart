@@ -1,5 +1,4 @@
 @extends('layouts.app')
-<link rel="stylesheet" href="/css/rate.css" >
  
  @section('content')
  <div class="row">
@@ -23,7 +22,8 @@
                     <div class="col-12">
                         <p class="samuraimart-product-label mt-2">
                             {{ $recommend_product->name }}<br>
-                            {{ $recommend_product->score_avg }}
+                            <!-- <div data-width="{{ $recommend_product->score_avg }}">★★★★★</div> -->
+                            <div data-width="4.5">★★★★★</div>
                             {{ $recommend_product->score_total }}<br>
                             <label>￥{{ $recommend_product->price }}</label>
                         </p>
@@ -48,8 +48,9 @@
                     <div class="col-12">
                         <p class="samuraimart-product-label mt-2">
                             {{ $recently_product->name }}<br>
-                            <label>{{ $recently_product->price }}</label><br>
-                            {{ $recently_product->score_avg }}<br>
+                            <label>￥{{ $recently_product->price }}</label>
+                            <!-- <div data-width="{{ $recently_product->score_avg }}">★★★★★</div> -->
+                            <div data-width="4.5">★★★★★</div>
                             {{ $recently_product->score_total }}
                         </p>
                     </div>
