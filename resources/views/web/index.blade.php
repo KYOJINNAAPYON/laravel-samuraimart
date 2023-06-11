@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<link rel="stylesheet" href="/css/rate.css" >
  
  @section('content')
  <div class="row">
@@ -22,9 +23,10 @@
                     <div class="col-12">
                         <p class="samuraimart-product-label mt-2">
                             {{ $recommend_product->name }}<br>
-                            <label>￥{{ $recommend_product->price }}</label><br>
-                            {{ $recommend_product->score_avg }}<br>
+                            <div data-rate="3.5"><span class="rate">3.5</span></div>
+                            <!-- <label data-rate="{{ $recommend_product->score_avg }}"></label> -->
                             {{ $recommend_product->score_total }}
+                            <label>￥{{ $recommend_product->price }}</label>
                         </p>
                     </div>
                 </div>
