@@ -68,8 +68,14 @@
          <div class="offset-1 col-11">
              <hr class="w-100">
              <h3 class="float-left">カスタマーレビュー</h3>
+             @if (isset($products_score->score_avg))
              {{$products_score->score_avg}}<br>
+             @endif
+             
+             @if (isset($products_score->score_total))
              {{$products_score->score_total}}<br>
+             @endif
+            <br>
          </div>
  
          <div class="offset-1 col-10">

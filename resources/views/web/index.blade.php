@@ -23,9 +23,8 @@
                     <div class="col-12">
                         <p class="samuraimart-product-label mt-2">
                             {{ $recommend_product->name }}<br>
-                            <div data-rate="3.5"><span class="rate">3.5</span></div>
-                            <!-- <label data-rate="{{ $recommend_product->score_avg }}"></label> -->
-                            {{ $recommend_product->score_total }}
+                            {{ $recommend_product->score_avg }}
+                            {{ $recommend_product->score_total }}<br>
                             <label>￥{{ $recommend_product->price }}</label>
                         </p>
                     </div>
