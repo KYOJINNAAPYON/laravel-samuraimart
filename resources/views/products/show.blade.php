@@ -71,10 +71,6 @@
              @if (isset($products_score->score_avg))
              {{$products_score->score_avg}}<br>
              @endif
-             
-             @if (isset($products_score->score_total))
-             {{$products_score->score_total}}<br>
-             @endif
             <br>
          </div>
  
