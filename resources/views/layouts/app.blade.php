@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/samuraimart.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/rate.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
