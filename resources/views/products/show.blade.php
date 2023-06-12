@@ -69,9 +69,15 @@
              <hr class="w-100">
              <h3 class="float-left">カスタマーレビュー</h3>
              @if (isset($products_score->score_avg))
-             {{$products_score->score_avg}}<br>
+             <div class="rate_star">
+                <label data-width="{{ $products_score->score_avg }}">★★★★★</label>
+                <label data-width="zero">★★★★★</label>{{ $products_score->score_total }}
+             </div>
+             @else
+             <div class="rate_null">
+                <label data-width="base">★★★★★</label>
+             </div>
              @endif
-            <br>
          </div>
  
          <div class="offset-1 col-10">

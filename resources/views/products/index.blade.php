@@ -32,13 +32,20 @@
                          @endif
                      </a>
                      <div class="row">
-                         <div class="col-12">
-                             <p class="samuraimart-product-label mt-2">
+                         <div class="col-12 mb-4 mt-2">
                                  {{$product->name}}<br>
-                                 {{$product->score_avg}}<br>
-                                 {{$product->score_total}}
-                                 <label>￥{{$product->price}}</label>
-                             </p>
+                                @if (is_null($product->score_avg))
+                                    <div class="rate_null">
+                                    <label data-width="base">★★★★★</label>
+                                    <label>￥{{$product->price }}</label>
+                                    </div>
+                                @else
+                                    <div class="rate_star">
+                                    <label data-width="{{ $product->score_avg }}">★★★★★</label>
+                                    <label data-width="zero">★★★★★</label>{{ $product->score_total }}
+                                    </div>
+                                    <label>￥{{ $product->price }}</label>
+                                @endif
                          </div>
                      </div>
                  </div>
