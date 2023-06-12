@@ -20,7 +20,7 @@ class WebController extends Controller
             $join->on('products.id', '=', 'products_score.product_id');})->orderBy('created_at', 'desc')->take(4)->get();
         $recommend_products = Product::leftJoinsub($products_score, 'products_score',function($join){
             $join->on('products.id', '=', 'products_score.product_id');})->where('recommend_flag', true)->take(3)->get();
-            
+
         return view('web.index', compact('major_categories', 'categories', 'recently_products', 'recommend_products', 'products_score'));
     }
 }
