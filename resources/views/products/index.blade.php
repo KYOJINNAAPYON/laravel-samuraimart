@@ -36,13 +36,13 @@
                                  {{$product->name}}<br>
                                 @if (is_null($product->score_avg))
                                     <div class="rate_null">
-                                    <label data-width="base">★★★★★</label>
+                                    <label class="base">★★★★★ 0</label>
                                     <label>￥{{$product->price }}</label>
                                     </div>
                                 @else
                                     <div class="rate_star">
                                     <label data-width="{{ $product->score_avg }}">★★★★★</label>
-                                    <label data-width="zero">★★★★★</label>{{ $product->score_total }}
+                                    <label class="base">★★★★★</label>{{ $product->score_total }}
                                     </div>
                                     <label>￥{{ $product->price }}</label>
                                 @endif

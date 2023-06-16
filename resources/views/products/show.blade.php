@@ -71,11 +71,11 @@
              @if (isset($products_score->score_avg))
              <div class="rate_star">
                 <label data-width="{{ $products_score->score_avg }}">★★★★★</label>
-                <label data-width="zero">★★★★★</label>{{ $products_score->score_total }}
+                <label class="base">★★★★★</label>{{ $products_score->score_total }}
              </div>
              @else
              <div class="rate_null">
-                <label data-width="base">★★★★★</label>
+                <label class="base">★★★★★ 0</label>
              </div>
              @endif
          </div>

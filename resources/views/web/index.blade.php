@@ -23,13 +23,13 @@
                             {{ $recommend_product->name }}
                             @if (is_null($recommend_product->score_avg))
                             <div class="rate_null">
-                            <label data-width="base">★★★★★</label>
+                            <label class="base">★★★★★</label>
                             <label>￥{{ $recommend_product->price }}</label>
                             </div>
                             @else
                             <div class="rate_star">
                             <label data-width="{{ $recommend_product->score_avg }}">★★★★★</label>
-                            <label data-width="zero">★★★★★</label>{{ $recommend_product->score_total }}
+                            <label class="base">★★★★★</label>{{ $recommend_product->score_total }}
                             </div>
                             <label>￥{{ $recommend_product->price }}</label>
                             @endif
@@ -56,13 +56,13 @@
                             {{ $recently_product->name }}
                             @if (is_null($recently_product->score_avg))
                             <div class="rate_null">
-                            <label data-width="base">★★★★★</label>
+                            <label class="base">★★★★★ 0</label>
                             <label>￥{{ $recently_product->price }}</label>
                             </div>
                             @else
                             <div class="rate_star">
                             <label data-width="{{ $recently_product->score_avg }}">★★★★★</label>
-                            <label data-width="zero">★★★★★</label>{{ $recently_product->score_total }}
+                            <label class="base">★★★★★</label>{{ $recently_product->score_total }}
                             </div>
                             <label>￥{{ $recently_product->price }}</label>
                             @endif
