@@ -19,7 +19,7 @@
             Sort By
             @sortablelink('id', 'ID')
             @sortablelink('price', 'Price')
-            @sortablelink('{{$product->score_avg}}', 'Score')
+            @sortablelink('score', 'Score')
         </div>
          <div class="container mt-4">
              <div class="row w-100">
