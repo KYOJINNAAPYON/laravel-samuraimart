@@ -15,7 +15,7 @@ class WebController extends Controller
         $categories = Category::all();
 
         $major_categories = MajorCategory::all();
-        $products_score = Review::selectRaw('product_id, ROUND(AVG(score),1) as score_avg, COUNT(product_id) as score_total')->groupBy('product_id');
+        $products_score = Review::selectRaw('product_id, ROUND(TRUNCATE(AVG(score)*2,0)/2, 1) as score_avg, COUNT(product_id) as score_total')->groupBy('product_id');
         $recently_products = Product::leftJoinsub($products_score, 'products_score',function($join){
             $join->on('products.id', '=', 'products_score.product_id');})->orderBy('created_at', 'desc')->take(4)->get();
         $recommend_products = Product::leftJoinsub($products_score, 'products_score',function($join){
