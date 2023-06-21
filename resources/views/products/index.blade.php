@@ -19,7 +19,11 @@
             Sort By
             @sortablelink('id', 'ID')
             @sortablelink('price', 'Price')
+<<<<<<< HEAD
             @sortablelink('score', 'Score')
+=======
+            @sortablelink('review', 'Review')
+>>>>>>> main
         </div>
          <div class="container mt-4">
              <div class="row w-100">

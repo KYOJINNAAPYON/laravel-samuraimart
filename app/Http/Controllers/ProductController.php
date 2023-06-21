@@ -20,7 +20,12 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if ($request->category !== null) {
+<<<<<<< HEAD
             $products_score = Review::selectRaw('product_id, ROUND(TRUNCATE(AVG(score)*2,0)/2, 1) as score_avg, COUNT(product_id) as score_total')->groupBy('product_id');
+=======
+            $products_score = Review::selectRaw('product_id, COUNT(product_id) as score_total')->groupBy('product_id');
+            $score_avg = Product::select("id")->withAvg('reviews', 'score')->groupBy('id')->get();
+>>>>>>> main
             $products = Product::where('category_id', $request->category)->leftJoinsub($products_score, 'products_score',function($join){
                 $join->on('products.id', '=', 'products_score.product_id');})->sortable()->paginate(15);
             $total_count = Product::where('category_id', $request->category)->count();
