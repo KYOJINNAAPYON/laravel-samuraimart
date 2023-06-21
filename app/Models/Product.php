@@ -30,7 +30,6 @@ class Product extends Model
         return $this->hasMany('App\Models\Review');
     }
 
-<<<<<<< HEAD
     public function scoreSortable($products, $direction) {
 
         $products_score = DB::table('reviews')
@@ -41,13 +40,5 @@ class Product extends Model
                             ->mergeBindings($products_score)
                             ->select('products.*')
                             ->orderBy('products.score', $direction);
-=======
-    public function scoreSortable($query, $direction) {
-
-        return $query->leftJoinsub('reviews', 'products.id', '=', 'reviews.user_id')
-                            ->withAvg('reviews', 'score')
-                            ->orderBy('reviews', $direction)
-                            ->select('products.*');
->>>>>>> main
     }
 }
