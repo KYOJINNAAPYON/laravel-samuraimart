@@ -28,4 +28,12 @@ class Product extends Model
     public function reviews() {
         return $this->hasMany('App\Models\Review');
     }
+
+    public function scoreSortable($query, $direction) {
+
+        return $query->leftJoinsub('reviews', 'products.id', '=', 'reviews.user_id')
+                            ->withAvg('reviews', 'score')
+                            ->orderBy('reviews', $direction)
+                            ->select('products.*');
+    }
 }
