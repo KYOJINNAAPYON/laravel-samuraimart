@@ -17,19 +17,17 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request,Product $product)
     {
         if ($request->category !== null) {
-            $products_score = Review::selectRaw('product_id, ROUND(TRUNCATE(AVG(score)*2,0)/2, 1) as score_avg, COUNT(product_id) as score_total')->groupBy('product_id');
-            $products = Product::where('category_id', $request->category)->leftJoinsub($products_score, 'products_score',function($join){
-                $join->on('products.id', '=', 'products_score.product_id');})->sortable()->paginate(15);
+            $products_score = Product::withAvg('reviews', 'score')->groupBy('id');
+            $products = Product::where('category_id', $request->category)->sortable()->paginate(15);
             $total_count = Product::where('category_id', $request->category)->count();
             $category = Category::find($request->category);
             $major_category = MajorCategory::find($category->major_category_id);
         } else {
-            $products_score = Review::selectRaw('product_id, ROUND(TRUNCATE(AVG(score)*2,0)/2, 1) as score_avg, COUNT(product_id) as score_total')->groupBy('product_id');
-            $products = Product::leftJoinsub($products_score, 'products_score',function($join){
-                $join->on('products.id', '=', 'products_score.product_id');})->sortable()->paginate(15);
+            $products_score = Product::withAvg('reviews', 'score')->groupBy('id');
+            $products = Product::sortable()->paginate(15);
             $total_count = "";
             $category = null;
             $major_category = null;
@@ -37,7 +35,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $major_categories = MajorCategory::all();
 
-        return view('products.index', compact('products', 'category', 'major_category', 'categories', 'major_categories', 'total_count', 'products_score'));
+        return view('products.index', compact('products', 'category', 'major_category', 'categories', 'major_categories', 'total_count'));
     }
 
     /**

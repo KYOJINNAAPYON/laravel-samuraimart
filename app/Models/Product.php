@@ -30,15 +30,10 @@ class Product extends Model
         return $this->hasMany('App\Models\Review');
     }
 
-    public function scoreSortable($products, $direction) {
+    public function scoreSortable($query, $direction) {
 
-        $products_score = DB::table('reviews')
-                            ->selectRaw('product_id, ROUND(AVG(score),1) as score_avg, COUNT(product_id) as score_total')
-                            ->groupBy('product_id');
-
-        return  $products->leftJoin(DB::raw(' ( ' . $products_score->toSql() . ' ) products'), 'products.id', '=', 'products_score.product_id')
-                            ->mergeBindings($products_score)
-                            ->select('products.*')
-                            ->orderBy('products.score', $direction);
+        return $query->leftJoin('products', 'id', '=', 'reviews.product_id')
+                            ->orderBy('score', $direction)
+                            ->select('products.*');
     }
 }
