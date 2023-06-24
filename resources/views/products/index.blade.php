@@ -19,8 +19,9 @@
             Sort By
             @sortablelink('id', 'ID')
             @sortablelink('price', 'Price')
-            @sortablelink('score', 'Score')
+            <!-- @sortablelink('reviews_avg_score', 'Score') -->
         </div>
+        
          <div class="container mt-4">
              <div class="row w-100">
                  @foreach($products as $product)
@@ -32,17 +33,19 @@
                          <img src="{{ asset('img/dummy.png')}}" class="img-thumbnail">
                          @endif
                      </a>
+                    
                      <div class="row">
                          <div class="col-12 mb-4 mt-2">
                                  {{$product->name}}<br>
-                                @if (is_null($product->score_avg))
+                                 {{ $product->reviews_avg_score }}
+                                @if (is_null($product->reviews_avg_score))
                                     <div class="rate_null">
                                     <label class="base">★★★★★ 0</label>
                                     <label>￥{{$product->price }}</label>
                                     </div>
                                 @else
                                     <div class="rate_star">
-                                    <label data-width="{{ $product->score_avg }}">★★★★★</label>
+                                    <label data-width="{{ $product->reviews_avg_score }}">★★★★★</label>
                                     <label class="base">★★★★★</label>{{ $product->score_total }}
                                     </div>
                                     <label>￥{{ $product->price }}</label>

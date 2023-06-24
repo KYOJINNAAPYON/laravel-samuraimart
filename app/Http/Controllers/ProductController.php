@@ -17,7 +17,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,Product $product)
+    public function index(Request $request)
     {
         if ($request->category !== null) {
             $products_score = Product::withAvg('reviews', 'score')->groupBy('id');
@@ -35,6 +35,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $major_categories = MajorCategory::all();
 
+        // dd($products);
         return view('products.index', compact('products', 'category', 'major_category', 'categories', 'major_categories', 'total_count'));
     }
 

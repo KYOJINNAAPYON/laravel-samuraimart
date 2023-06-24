@@ -31,9 +31,13 @@ class Product extends Model
     }
 
     public function scoreSortable($query, $direction) {
+        // dd($direction);
 
-        return $query->leftJoin('products', 'id', '=', 'reviews.product_id')
-                            ->orderBy('score', $direction)
-                            ->select('products.*');
+        // return $query->leftJoin('reviews', 'products.id', '=', 'reviews.product_id')
+        //                     ->orderBy('score', $direction)
+        //                     ->select('products.*');
+
+        return $query->withAvg('reviews', 'score')->orderBy('reviews_avg_score', $direction);
+
     }
 }
