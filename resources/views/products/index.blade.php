@@ -19,7 +19,7 @@
             Sort By
             @sortablelink('id', 'ID')
             @sortablelink('price', 'Price')
-            <!-- @sortablelink('reviews_avg_score', 'Score') -->
+            @sortablelink('score', 'Score')
         </div>
         
          <div class="container mt-4">
@@ -37,7 +37,6 @@
                      <div class="row">
                          <div class="col-12 mb-4 mt-2">
                                  {{$product->name}}<br>
-                                 {{ $product->reviews_avg_score }}
                                 @if (is_null($product->reviews_avg_score))
                                     <div class="rate_null">
                                     <label class="base">★★★★★ 0</label>
@@ -45,8 +44,8 @@
                                     </div>
                                 @else
                                     <div class="rate_star">
-                                    <label data-width="{{ $product->reviews_avg_score }}">★★★★★</label>
-                                    <label class="base">★★★★★</label>{{ $product->score_total }}
+                                    <label data-width="{{ round($product->reviews_avg_score, 1) }}">★★★★★</label>
+                                    <label class="base">★★★★★</label>{{ $reviews_count->reviews_count }}
                                     </div>
                                     <label>￥{{ $product->price }}</label>
                                 @endif
