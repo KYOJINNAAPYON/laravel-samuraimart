@@ -45,7 +45,12 @@
                                 @else
                                     <div class="rate_star">
                                     <label data-width="{{ round($product->reviews_avg_score, 1) }}">★★★★★</label>
-                                    <label class="base">★★★★★</label>{{ $reviews_count->reviews_count }}
+                                    <label class="base">★★★★★</label>
+                                    @foreach( $reviews as $review )
+                                    @if ($review->id === $product->id)
+                                    {{ $review->reviews_count }}
+                                    @endif
+                                    @endforeach
                                     </div>
                                     <label>￥{{ $product->price }}</label>
                                 @endif
