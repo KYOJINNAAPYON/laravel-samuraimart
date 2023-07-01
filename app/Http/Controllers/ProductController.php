@@ -20,13 +20,13 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if ($request->category !== null) {
-            $products_score = Product::withAvg('reviews', 'score')->groupBy('id');
+            $reviews = Product::withCount('reviews')->get();
             $products = Product::where('category_id', $request->category)->sortable()->paginate(15);
             $total_count = Product::where('category_id', $request->category)->count();
             $category = Category::find($request->category);
             $major_category = MajorCategory::find($category->major_category_id);
         } else {
-            $products_score = Product::withAvg('reviews', 'score')->groupBy('id');
+            $reviews = Product::withCount('reviews')->get();
             $products = Product::sortable()->paginate(15);
             $total_count = "";
             $category = null;
@@ -35,8 +35,8 @@ class ProductController extends Controller
         $categories = Category::all();
         $major_categories = MajorCategory::all();
 
-        // dd($products);
-        return view('products.index', compact('products', 'category', 'major_category', 'categories', 'major_categories', 'total_count'));
+        // dd($reviews);
+        return view('products.index', compact('products', 'category', 'major_category', 'categories', 'major_categories', 'reviews'));
     }
 
     /**
