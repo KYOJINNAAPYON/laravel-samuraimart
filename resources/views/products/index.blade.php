@@ -36,7 +36,7 @@
                     
                      <div class="row">
                          <div class="col-12 mb-4 mt-2">
-                                 {{$product->name}}<br>
+                                 {{$product->name}}<br>{{ $product->id}}
                                 @if (is_null($product->reviews_avg_score))
                                     <div class="rate_null">
                                     <label class="base">★★★★★ 0</label>

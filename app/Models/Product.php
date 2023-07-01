@@ -42,12 +42,12 @@ class Product extends Model
     }
     public function idSortable($query, $direction) {
 
-        return $query->withAvg('reviews', 'score')->orderBy('reviews_avg_score', $direction);
+        return $query->withAvg('reviews', 'score')->orderBy('id', $direction);
 
     }
     public function priceSortable($query, $direction) {
 
-        return $query->withAvg('reviews', 'score')->orderBy('reviews_avg_score', $direction);
+        return $query->withAvg('reviews', 'score')->orderBy('price', $direction);
 
     }
 }
