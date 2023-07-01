@@ -20,20 +20,14 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if ($request->category !== null) {
-            $reviews = Product::withCount('reviews')->get();
-            $score_avg = Review::selectRaw('product_id, ROUND(AVG(score), 1) as score_avg')->groupBy('product_id');
-            $products = Product::where('category_id', $request->category)->leftJoinSub($score_avg, 'score_avg',  function ($join) {
-                $join->on('products.id', '=', 'score_avg.product_id');
-            })->sortable()->paginate(15);
+            $products_score = Product::withAvg('reviews', 'score')->groupBy('id');
+            $products = Product::where('category_id', $request->category)->sortable()->paginate(15);
             $total_count = Product::where('category_id', $request->category)->count();
             $category = Category::find($request->category);
             $major_category = MajorCategory::find($category->major_category_id);
         } else {
-            $reviews = Product::withCount('reviews')->get();
-            $score_avg = Review::selectRaw('product_id, ROUND(AVG(score), 1) as score_avg')->groupBy('product_id');
-            $products = Product::leftJoinSub($score_avg, 'score_avg',  function ($join) {
-                $join->on('products.id', '=', 'score_avg.product_id');
-            })->sortable()->paginate(15);
+            $products_score = Product::withAvg('reviews', 'score')->groupBy('id');
+            $products = Product::sortable()->paginate(15);
             $total_count = "";
             $category = null;
             $major_category = null;
@@ -42,7 +36,7 @@ class ProductController extends Controller
         $major_categories = MajorCategory::all();
 
         // dd($products);
-        return view('products.index', compact('products', 'category', 'major_category', 'categories', 'major_categories', 'total_count', 'score_avg', 'reviews'));
+        return view('products.index', compact('products', 'category', 'major_category', 'categories', 'major_categories', 'total_count'));
     }
 
     /**

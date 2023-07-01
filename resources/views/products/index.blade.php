@@ -37,20 +37,17 @@
                      <div class="row">
                          <div class="col-12 mb-4 mt-2">
                                  {{$product->name}}<br>
-                                @if (is_null($product->score_avg))
+                                @if (is_null($product->reviews_avg_score))
                                     <div class="rate_null">
                                     <label class="base">★★★★★ 0</label>
                                     <label>￥{{$product->price }}</label>
                                     </div>
                                 @else
                                     <div class="rate_star">
-                                    <label data-width="{{ $product->score_avg }}">★★★★★</label>
+                                    <label data-width="{{ round($product->reviews_avg_score,1) }}">★★★★★</label>
                                     <label class="base">★★★★★</label>
-                                    @foreach( $reviews as $review )
-                                    @if ($review->id === $product->id)
-                                    {{ $review->reviews_count }}
-                                    @endif
-                                    @endforeach
+                                    
+                                    
                                     </div>
                                     <label>￥{{ $product->price }}</label>
                                 @endif
