@@ -37,17 +37,17 @@ class Product extends Model
         //                     ->orderBy('score', $direction)
         //                     ->select('products.*');
 
-        return $query->withAvg('reviews', 'score')->orderBy('reviews_avg_score', $direction);
+        return $query->withAvg('reviews', 'score')->withCount('reviews')->orderBy('reviews_avg_score', $direction);
 
     }
-    // public function idSortable($query, $direction) {
+    public function idSortable($query, $direction) {
 
-    //     return $query->withAvg('reviews', 'score')->orderBy('id', $direction);
+        return $query->withAvg('reviews', 'score')->withCount('reviews')->orderBy('id', $direction);
 
-    // }
-    // public function priceSortable($query, $direction) {
+    }
+    public function priceSortable($query, $direction) {
 
-    //     return $query->withAvg('reviews', 'score')->orderBy('price', $direction);
+        return $query->withAvg('reviews', 'score')->withCount('reviews')->orderBy('price', $direction);
 
-    // }
+    }
 }
