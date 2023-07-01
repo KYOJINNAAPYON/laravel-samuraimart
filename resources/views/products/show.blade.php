@@ -68,9 +68,9 @@
          <div class="offset-1 col-11">
              <hr class="w-100">
              <h3 class="float-left">カスタマーレビュー</h3>
-             @if (isset($products_score->score_avg))
+             @if (isset($score_avg->reviews_avg_score))
              <div class="rate_star">
-                <label data-width="{{ $products_score->score_avg }}">★★★★★</label>
+                <label data-width="{{ round($score_avg->reviews_avg_score, 1) }}">★★★★★</label>
                 <label class="base">★★★★★</label>{{ $products_score->score_total }}
              </div>
              @else
