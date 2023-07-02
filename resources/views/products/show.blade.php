@@ -64,20 +64,24 @@
              </form>
              @endauth
          </div>
- 
+
          <div class="offset-1 col-11">
              <hr class="w-100">
              <h3 class="float-left">カスタマーレビュー</h3>
-             @if (isset($score_avg->reviews_avg_score))
+             @foreach($review_scores as $review_score)
+             @if($product->id === $review_score->id)
+             @if (isset($review_score->reviews_avg_score))
              <div class="rate_star">
-                <label data-width="{{ round($score_avg->reviews_avg_score, 1) }}">★★★★★</label>
-                <label class="base">★★★★★</label>{{ $products_score->score_total }}
+                <label data-width="{{ round($review_score->reviews_avg_score, 1) }}">★★★★★</label>
+                <label class="base">★★★★★</label>{{ $review_score->reviews_count }}
              </div>
              @else
              <div class="rate_null">
                 <label class="base">★★★★★ 0</label>
              </div>
              @endif
+             @endif
+             @endforeach
          </div>
  
          <div class="offset-1 col-10">
@@ -91,7 +95,7 @@
                  </div>
                  @endforeach
              </div><br />
- 
+
              @auth
              <div class="row">
                  <div class="offset-md-5 col-md-5">

@@ -21,15 +21,15 @@
                 <div class="row">
                     <div class="col-12 mb-4 mt-2">
                             {{ $recommend_product->name }}
-                            @if (is_null($recommend_product->score_avg))
+                            @if (is_null($recommend_product->reviews_avg_score))
                             <div class="rate_null">
                             <label class="base">★★★★★</label>
                             <label>￥{{ $recommend_product->price }}</label>
                             </div>
                             @else
                             <div class="rate_star">
-                            <label data-width="{{ $recommend_product->score_avg }}">★★★★★</label>
-                            <label class="base">★★★★★</label>{{ $recommend_product->score_total }}
+                            <label data-width="{{ round($recommend_product->reviews_avg_score,1) }}">★★★★★</label>
+                            <label class="base">★★★★★</label>{{ $recommend_product->reviews_count }}
                             </div>
                             <label>￥{{ $recommend_product->price }}</label>
                             @endif
@@ -54,15 +54,15 @@
                     <div class="col-12">
                         <div class="col-12 mb-4 mt-2">
                             {{ $recently_product->name }}
-                            @if (is_null($recently_product->score_avg))
+                            @if (is_null($recently_product->reviews_avg_score))
                             <div class="rate_null">
                             <label class="base">★★★★★ 0</label>
                             <label>￥{{ $recently_product->price }}</label>
                             </div>
                             @else
                             <div class="rate_star">
-                            <label data-width="{{ $recently_product->score_avg }}">★★★★★</label>
-                            <label class="base">★★★★★</label>{{ $recently_product->score_total }}
+                            <label data-width="{{ round($recently_product->reviews_avg_score,1) }}">★★★★★</label>
+                            <label class="base">★★★★★</label>{{ $recently_product->reviews_count }}
                             </div>
                             <label>￥{{ $recently_product->price }}</label>
                             @endif

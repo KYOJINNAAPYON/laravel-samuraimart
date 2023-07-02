@@ -35,7 +35,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $major_categories = MajorCategory::all();
 
-        // dd($reviews);
+        // dd($products);
         return view('products.index', compact('products', 'category', 'major_category', 'categories', 'major_categories'));
     }
 
@@ -78,10 +78,11 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $reviews = $product->reviews()->get();
-        $score_avg = Product::withAvg('reviews', 'score')->first();
-        $products_score = Review::selectRaw('product_id, ROUND(TRUNCATE(AVG(score)*2,0)/2, 1) as score_avg, COUNT(product_id) as score_total')->groupBy('product_id')->where('product_id','=',$product->id)->first();
+        $review_scores = Product::withCount('reviews')->withAvg('reviews', 'score')->get();
+        // $score_avg = Product::withAvg('reviews', 'score')->first();
+        // $products_score = Review::selectRaw('product_id, COUNT(product_id) as score_total')->groupBy('product_id')->where('product_id','=',$product->id)->first();
         // $score_avg = Review::selectRaw('product_id, ROUND(AVG(score),1) as score_avg')->groupBy('product_id')->where('product_id','=',$product->id)->first();
-        return view('products.show', compact('product', 'reviews', 'products_score' ,'score_avg'));
+        return view('products.show', compact('product', 'reviews','review_scores'));
     }
 
     /**
