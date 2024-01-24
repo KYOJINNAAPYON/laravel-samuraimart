@@ -15,36 +15,35 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-       $major_category_names = [
-        '本', 'コンピュータ', 'ディスプレイ'
-       ];
+        $major_category_names = [
+        '食品', '家電製品', '本'
+        ];
 
-       $book_categories = [
-        'ビジネス', '文学・評論', '人文・思想', 'スポーツ',
-             'コンピュータ・IT', '資格・検定・就職', '絵本・児童書', '写真集',
-             'ゲーム攻略本', '雑誌', 'アート・デザイン', 'ノンフィクション'
-       ];
+        $food_categories = [
+        'フルーツ', '野菜', 'アメリカン', 'メキシカン',
+        '和食', '韓国料理', 'イタリアン', 'スパニッシュ', '中華料理'
+        ];
 
-       $computer_categories = [
-        'ノートPC', 'デスクトップPC', 'タブレット'
-       ];
+        $computer_categories = [
+        'PC', 'スマートフォン', 'アクセサリー'
+        ];
 
-       $display_categories = [
-        '19~20インチ', 'デスクトップPC', 'タブレット'
-       ];
+        $book_categories = [
+        'サスペンス', '恋愛' ,'その他'
+        ];
 
-       foreach ($major_category_names as $major_category_name) {
-        if ($major_category_name == '本') {
-            foreach ($book_categories as $book_category) {
+        foreach ($major_category_names as $major_category_name) {
+        if ($major_category_name == '食品') {
+            foreach ($food_categories as $food_category) {
                 Category::create([
-                    'name' => $book_category,
-                    'description' => $book_category,
+                    'name' => $food_category,
+                    'description' => $food_category,
                     'major_category_name' => $major_category_name
                 ]);
             }
         }
 
-        if ($major_category_name == 'コンピュータ') {
+        if ($major_category_name == '家電製品') {
             foreach ($computer_categories as $computer_category) {
                 Category::create([
                     'name' => $computer_category,
@@ -54,15 +53,15 @@ class CategoriesTableSeeder extends Seeder
             }
         }
 
-        if ($major_category_name == 'ディスプレイ') {
-            foreach ($display_categories as $display_category) {
+        if ($major_category_name == '本') {
+            foreach ($book_categories as $book_category) {
                 Category::create([
-                    'name' => $display_category,
-                    'description' => $display_category,
+                    'name' => $book_category,
+                    'description' => $book_category,
                     'major_category_name' => $major_category_name
                 ]);
             }
         }
-       }
+    }
     }
 }

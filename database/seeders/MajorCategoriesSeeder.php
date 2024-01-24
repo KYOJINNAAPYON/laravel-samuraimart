@@ -16,7 +16,7 @@ class MajorCategoriesSeeder extends Seeder
     public function run()
     {
         $major_category_names = [
-            '本', 'コンピュータ', 'ディスプレイ'
+            '食品', '家電製品', '本'
         ];
 
         foreach ($major_category_names as $major_category_name) {

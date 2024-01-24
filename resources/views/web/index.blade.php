@@ -23,7 +23,7 @@
                             {{ $recommend_product->name }}
                             @if (is_null($recommend_product->reviews_avg_score))
                             <div class="rate_null">
-                            <label class="base">★★★★★</label>
+                            <label class="base">★★★★★ 0</label>
                             <label>￥{{ $recommend_product->price }}</label>
                             </div>
                             @else

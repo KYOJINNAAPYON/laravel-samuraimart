@@ -20,23 +20,24 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if ($request->category !== null) {
-            // $reviews = Product::withCount('reviews')->withAvg('reviews', 'score')->get();
             $products = Product::where('category_id', $request->category)->withCount('reviews')->withAvg('reviews', 'score')->sortable()->paginate(15);
+            
             $total_count = Product::where('category_id', $request->category)->count();
             $category = Category::find($request->category);
             $major_category = MajorCategory::find($category->major_category_id);
         } else {
-            // $reviews = Product::withCount('reviews')->withAvg('reviews', 'score')->get();
             $products = Product::withCount('reviews')->withAvg('reviews', 'score')->sortable()->paginate(15);
+
             $total_count = "";
             $category = null;
             $major_category = null;
         }
         $categories = Category::all();
         $major_categories = MajorCategory::all();
+        $products_all = Product::sortable()->paginate(15);
 
         // dd($products);
-        return view('products.index', compact('products', 'category', 'major_category', 'categories', 'major_categories'));
+        return view('products.index', compact('products', 'category', 'major_category', 'categories', 'major_categories', 'total_count', 'products_all'));
     }
 
     /**
