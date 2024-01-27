@@ -33,7 +33,7 @@ class CartController extends Controller
             $total += env('CARRIAGE');
             $carriage_cost = env('CARRIAGE');
         }
-
+        // dd($cart);
         return view('carts.index', compact('cart', 'total', 'carriage_cost'));
     }
 
@@ -55,12 +55,12 @@ class CartController extends Controller
                 'weight' => $request->weight,
                 'options' => [
                     'image' => $request->image,
-                    'carriage' => $request->carriage
+                    'carriage' => $request->carriage,
                 ]
             ]
             );
 
-            return to_route('products.show', $request->get('id'));
+            return to_route('carts.index');
     }
 
     /**
