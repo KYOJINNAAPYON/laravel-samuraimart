@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6901af2d45ea73261ec1b348f6f728b5",
+    "content-hash": "1d11ffc81f6e440dbf3fa283b124af47",
     "packages": [
         {
             "name": "brick/math",
@@ -3027,16 +3027,16 @@
         },
         {
             "name": "payjp/payjp-php",
-            "version": "1.3.0",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/payjp/payjp-php.git",
-                "reference": "bf32375f76864af2dc94ddedce9fc1536004cde9"
+                "reference": "6a489962baf45acbaea17501333e5f4acd00fdbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/payjp/payjp-php/zipball/bf32375f76864af2dc94ddedce9fc1536004cde9",
-                "reference": "bf32375f76864af2dc94ddedce9fc1536004cde9",
+                "url": "https://api.github.com/repos/payjp/payjp-php/zipball/6a489962baf45acbaea17501333e5f4acd00fdbd",
+                "reference": "6a489962baf45acbaea17501333e5f4acd00fdbd",
                 "shasum": ""
             },
             "require": {
@@ -3079,9 +3079,9 @@
             ],
             "support": {
                 "issues": "https://github.com/payjp/payjp-php/issues",
-                "source": "https://github.com/payjp/payjp-php/tree/1.3.0"
+                "source": "https://github.com/payjp/payjp-php/tree/1.5.0"
             },
-            "time": "2022-10-04T04:12:09+00:00"
+            "time": "2023-09-29T07:51:41+00:00"
         },
         {
             "name": "phpoption/phpoption",
